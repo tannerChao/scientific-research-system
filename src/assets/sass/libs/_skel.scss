@@ -1,0 +1,80 @@
+@import './mixins';
+
+%clearfix {
+    &:after,
+    &:before {
+        content: '';
+        display: table;
+        font: 0/0 a;
+    }
+    &:after {
+        clear: both;
+    }
+    &{
+        *zoom: 1;
+    }
+}
+%pos-middle{
+    left             : 50%;
+    top              : 50%;
+    position         : absolute;
+    -webkit-transform: translate(-50%,-50%);
+        transform    : translate(-50%,-50%);
+}
+
+%middle{
+    text-align:center;
+    & > *,
+    &::after{
+        display:inline-block;
+        vertical-align:middle;
+    }
+    &::after{
+        content:'';
+        height:100%;
+        visibility: hidden;
+    }
+}
+
+%ellipsis,
+%ellipsis-multi-2,
+%ellipsis-multi-3{
+    overflow: hidden;
+}
+
+%ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+%ellipsis-multi-2 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+%ellipsis-multi-3 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+%transition{
+    transition: all .2s;
+}
+
+.g-red{
+    color: _palette(text,c4)
+}
+.g-orange{
+    color: _palette(text,c5)
+}
+.g-green{
+    color: _palette(text,c6)
+}
+.g-teal{
+    color: _palette(text,c7)
+}
+.g-blue{
+    color: _palette(text,c8)
+}
+

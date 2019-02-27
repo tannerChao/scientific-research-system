@@ -1,0 +1,83 @@
+/*=============================================
+=            Reset Ant Css                    =
+=============================================*/
+@import './libs/function';
+/*----------  Layout Components  ----------*/
+
+.home {
+
+    .ant-layout-sider-children,
+    .ant-layout-sider-trigger,
+    .ant-layout-sider,
+
+    .ant-menu a{
+        color: #fff;
+    }
+    .personal-li a{
+        color: #666;
+    }
+ 
+    .personal-li-active a{
+        color: #7352BF;
+    }
+    .personal-li-active{
+        border-right: 1px solid #7352BF;
+        background-color: #f7f0ff;
+    }
+    .header .anticon {
+        cursor: pointer;
+        margin-left: 20px;
+    }
+}
+// html .ant-menu-dark .ant-menu-sub {
+//     background-color: _palette(purples, deepdark);
+// }
+
+/*----------  Notification Components  ----------*/
+html .ant-notification {
+    width: 470px;
+}
+.ant-notification-notice {
+    transition: background .6s;
+    color: #fff; 
+    cursor: default;
+    .ant-notification-notice-icon {
+        color: #fff;
+        font-size: 40px;
+        margin-left: -4px;
+        margin-top: 12px;
+    }
+    .ant-notification-notice-message, 
+    .ant-notification-notice-close-x {
+        color: #fff;
+    }
+    .ant-notification-notice-close-x:active {
+        color: #d1d1d1;
+    }
+    &.success-notification {
+        background: rgba(114, 203, 161, .9);
+        &:hover {background: #59c68f;}
+        .ant-notification-notice-icon-success:before {content: '\E630';}
+    }
+    &.info-notification {
+        background: rgba(129, 180, 239, .9);
+        &:hover { background: #549ef5;}
+        .ant-notification-notice-icon-info:before { content: '\E628';}
+    }
+    &.warning-notification {
+        background: rgba(243, 201, 97, .9);
+        &:hover { background: #f2be3c;}
+        .ant-notification-notice-icon-warning:before { content: '\E62C';}
+    }
+    &.error-notification {
+        background: rgba(232, 134, 135, .9);
+        &:hover { background: #fc7374;}
+        .ant-notification-notice-icon-error:before { content: '\E62E';}
+    }
+}
+.ant-pagination{
+    font-size: 12px
+}
+.ant-form-explain{
+    font-size: 12px
+}

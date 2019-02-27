@@ -1,0 +1,201 @@
+
+//栅栏
+@mixin grid($column: 12) {
+    $col: 100 / $column;
+    @for $i from 1 through $column {
+        $width:percentage( $col * $i / 100 );
+        @if $i < 10{
+            .dom .\3#{$i} u {
+                width: $width;
+            }
+        }@else{
+
+            $x: str-slice('#{$i}',2, 3);
+            .dom .\31 #{$x}u {
+                 width: $width;
+            }
+        }
+    }
+}
+
+/// Resets browser styles.
+/// @param {string} $mode Mode (default is 'normalize').
+@mixin reset($mode: 'normalize') {
+    @if $mode == 'normalize' {
+        // normalize.css v3.0.2 | MIT License | git.io/normalize
+        html{font-family:'Lato','Helvetica Neue',Arial,Helvetica,sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background-color:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:700}dfn{font-style:italic}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}
+    }
+    @else if $mode == 'full' {
+        // meyerweb.com/eric/tools/css/reset v2.0 | 20110126 | License: none (public domain)
+        html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}body{line-height:1;}ol,ul{list-style:none;}blockquote,q{quotes:none;}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}table{border-collapse:collapse;border-spacing:0;}body{-webkit-text-size-adjust:none}
+    }
+}
+
+
+@mixin boxModel($step:5){
+    //top left bottom right
+    $alias:('row','col','top','left','bottom','right','');
+
+    @for $i from 1 through 10{
+        $val: $step * $i;
+        @for $j from 1 through length($alias){
+            $dir:nth($alias,$j);
+            .dom{
+                @if $dir == 'row'{
+                    &.mg-#{$dir}#{$val},
+                    & .mg-#{$dir}#{$val}{
+                        margin: $val + px 0;
+                    }
+                    &.pg-#{$dir}#{$val},
+                    & .pg-#{$dir}#{$val}{
+                        padding: $val + px 0;
+                    }
+                }
+                @else if $dir == 'col'{
+                    &.mg-#{$dir}#{$val},
+                    & .mg-#{$dir}#{$val}{
+                        margin: 0 $val + px;
+                    }
+                    &.pg-#{$dir}#{$val},
+                    & .pg-#{$dir}#{$val}{
+                        padding: 0 $val + px;
+                    }
+                }
+                @else if $dir == 'top' or $dir == 'left' or $dir == 'bottom' or $dir == 'right'{
+                    &.mg-#{$dir}#{$val},
+                    & .mg-#{$dir}#{$val}{
+                        margin-#{$dir}:$val + px;
+                    }
+                    &.pg-#{$dir}#{$val},
+                    & .pg-#{$dir}#{$val}{
+                        padding-#{$dir}:$val + px;
+                    }
+                }
+                @else{
+                    &.mg#{$val},
+                    & .mg#{$val}{
+                        margin:$val + px;
+                    }
+                    &.pg#{$val},
+                    & .pg#{$val}{
+                        padding:$val + px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+//设置HTML元素字体大小
+//@param {list} $devices 适配尺寸
+@mixin mediaFontSize($devices:()){
+    //320,375,400,414,480
+    html{
+        font-size: 14px !important;
+    }
+    @for $i from 1 through length($devices){
+        $device:nth($devices,$i);
+        //$font: $device / 26.5;
+        $font: $device / 37.5 + 4;
+        @media only screen and (min-width:$device + px){
+            html{
+                font-size: $font + px !important;
+            }
+        }
+    }
+};
+//1rem = 14px
+
+@mixin hairline($dir, $color:#dadada){
+    $dprs:(1,1.5,2,3,4);
+    &{
+        position: relative;
+    }
+    &::before,
+    &::after{
+        z-index         : 10;
+        top             : 0;
+        left            : 0;
+        content         : '';
+        position        : absolute;
+        background-color: $color;
+    }
+
+    @if $dir == 'top' or $dir == 'bottom'{
+        &:before{
+            width           : 100%;
+            height          : 1px;
+            transform-origin: 50% 0%;
+            @for $i from 1 through length($dprs){
+                $dpr:nth($dprs,$i);
+                @media only screen and (-webkit-min-device-pixel-ratio: $dpr),(min-device-pixel-ratio: $dpr) {
+                    transform        : scaleY(1/$dpr);
+                    -webkit-transform: scaleY(1/$dpr);
+                }
+            }
+            @if $dir == 'bottom'{
+                top             : auto !important;
+                bottom          : 0;
+                transform-origin: 50% 100%;
+            }
+        }
+    }
+    @else if $dir == 'left' or $dir == 'right'{
+        &:after{
+            width           : 1px;
+            height          : 100%;
+            transform-origin: 0 50%;
+            @for $i from 1 through length($dprs){
+                $dpr:nth($dprs,$i);
+                @media only screen and (-webkit-min-device-pixel-ratio: $dpr),(min-device-pixel-ratio: $dpr) {
+                     transform        : scaleX(1/$dpr);
+                     -webkit-transform: scaleX(1/$dpr);
+                }
+            }
+            @if $dir == 'right'{
+                left            : auto !important;
+                right           : 0;
+                transform-origin: 100% 50%;
+            }
+        }
+    }
+};
+@mixin removeHairline($dir){
+    @if $dir == 'left' or $dir == 'right'{
+        &:after{
+            display: none;
+        }
+    }@else if $dir == 'top' or $dir == 'bottom'{
+        &:before{
+            display: none;
+        }
+    }
+}
+
+
+@mixin skel-layout($config:()){
+    //reset
+    $x:map-get($config,'reset');
+    @if $x{
+        @include reset($x);
+    }
+
+    //栅栏
+    $x:map-get($config,'grid');
+    @if $x{
+        @include grid();
+    }
+
+    //盒布局
+    $x:map-get($config,'boxModel');
+    @if $x{
+        @include boxModel($x);
+    }
+
+    //根元素字体大小
+    $map:map-get($config, 'mediaFontSize');
+    @if $map{
+        @include mediaFontSize($map);
+    }
+};

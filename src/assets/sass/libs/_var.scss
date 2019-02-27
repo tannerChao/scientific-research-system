@@ -1,0 +1,42 @@
+
+$palette:(
+    grays:(
+        default: #999,
+        darker : #333,
+        dark   : #666,
+        medium : #ccc,
+        light  : #eee
+    ),
+    purples: (
+        default: #7352bf,
+        light: #583A8C,
+        dark: #3B2264,
+        deepdark: #23143C
+    ),
+    bg:(
+        b1:#222d32
+    ),
+    text:(
+        c1:rgba(255,255,255,.9),
+        c2:#333,
+        c3:#c277ed,
+        c4:#DB2828,
+        c5:#eaae00,
+        c6:#21BA45,
+        c7:#00B5AD,
+        c8:#1678c2
+    ),
+    border:(
+        b1:rgba(34,36,38,.15)
+    )
+);
+
+$font:(
+    size:(
+        base:14px
+    )
+);
+
+$size:(
+    space:70px
+)
