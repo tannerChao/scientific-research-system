@@ -9,42 +9,46 @@ class Achievements extends Component {
                 key: '1',
                 name: 'John Brown',
                 money: '￥300,000.00',
-                address: 'New York No. 1sdfsdfsdfsfsfds',
+                address: 'New York No. ',
               }],
 
 
               columns : [{
                 title: '类型',
                 dataIndex: 'name',
-                render: text => <a href="javascript:;">{text}</a>,
-                width: 150
+                render: text => <span href="javascript:;" className='td-span' style={{width:'100px'}}>{text}</span>,
+                width: 100
               }, {
                 title: '期刊类型',
                 className: 'column-money',
                 dataIndex: 'money',
-                width: 150
+                width: 100,
+                render: text => <span href="javascript:;" className='td-span' style={{width:'100px'}}>{text}</span>
               }, {
                 title: '文章论著名称',
                 dataIndex: 'address',
-                width: 150,
-                render: text => <span href="javascript:;" className='td-span' style={{width:'150px'}}>{text}</span>,
+                width: 200,
+                render: text => <span href="javascript:;" className='td-span' style={{width:'200px'}}>{text}</span>,
               }, {
                 title: 'ISSN',
                 dataIndex: 'address2',
                 render: text => <span href="javascript:;" className='td-span' style={{width:'150px'}}>{text}</span>,
-                
+                width: 150,
               }, {
                 title: 'CN',
                 dataIndex: 'address3',
-                width: 150
+                render: text => <span href="javascript:;" className='td-span' style={{width:'150px'}}>{text}</span>,
+                width: 150,
               }, {
                 title: 'ISBN',
                 dataIndex: 'address4',
-                width: 150
+                render: text => <span href="javascript:;" className='td-span' style={{width:'150px'}}>{text}</span>,
+                width: 150,
               }, {
                 title: '发表时间',
                 dataIndex: 'address5',
-                width: 150
+                render: text => <span href="javascript:;" className='td-span' style={{width:'150px'}}>{text}</span>,
+                width: 150,
               }, {
                 title: '刊物或出版社',
                 dataIndex: 'address6',
@@ -52,27 +56,33 @@ class Achievements extends Component {
               }, {
                 title: '卷期数',
                 dataIndex: 'address7',
-                width: 150
+                render: text => <span href="javascript:;" className='td-span' style={{width:'150px'}}>{text}</span>,
+                width: 150,
               }, {
                 title: '完成字数',
                 dataIndex: 'address8',
-                width: 150
+                render: text => <span href="javascript:;" className='td-span' style={{width:'150px'}}>{text}</span>,
+                width: 150,
               }, {
                 title: '期刊级别',
                 dataIndex: 'address9',
-                width: 150
+                render: text => <span href="javascript:;" className='td-span' style={{width:'150px'}}>{text}</span>,
+                width: 150,
               }, {
                 title: '期刊性质',
                 dataIndex: 'address10',
-                width: 150
+                render: text => <span href="javascript:;" className='td-span' style={{width:'150px'}}>{text}</span>,
+                width: 150,
               }, {
                 title: '参与人数',
                 dataIndex: 'address11',
-                width: 150
+                render: text => <span href="javascript:;" className='td-span' style={{width:'150px'}}>{text}</span>,
+                width: 150,
               }, {
                 title: '本人排名',
                 dataIndex: 'address12',
-                width: 150
+                render: text => <span href="javascript:;" className='td-span' style={{width:'150px'}}>{text}</span>,
+                width: 150,
               }],
 
               addState: false
@@ -100,7 +110,7 @@ class Achievements extends Component {
                               dataSource={data}
                               bordered
                               pagination={false}
-                              scroll={{x: 2111, y: 300}}
+                              scroll={{x: 2100, y: 300}}
                           />
                       </Row>
 
@@ -111,7 +121,7 @@ class Achievements extends Component {
                               dataSource={data}
                               bordered
                               pagination={false}
-                              scroll={{x: 2111, y: 300}}
+                              scroll={{x: 2100, y: 300}}
                           />
                       </Row> 
 
@@ -122,7 +132,7 @@ class Achievements extends Component {
                               dataSource={data}
                               bordered
                               pagination={false}
-                              scroll={{x: 2111, y: 300}}
+                              scroll={{x: 2100, y: 300}}
                           />
                       </Row>
                     </Row>
