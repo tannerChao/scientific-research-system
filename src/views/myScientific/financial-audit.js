@@ -49,9 +49,11 @@ class FinancialAudit extends Component {
               }, {
                 title: '',
                 dataIndex: 'address1',
+                render: text => <a href="javascript:;">详情</a>
               }, {
                 title: '',
                 dataIndex: 'address1',
+                render: text => <a href="javascript:;">审核</a>
               }]
         }
     }

@@ -81,3 +81,30 @@ html .ant-notification {
 .ant-form-explain{
     font-size: 12px
 }
+
+.achievements {
+    .content{
+        .ant-table-bordered .ant-table-tbody > tr > td{
+            word-break:keep-all;           /* 不换行 */
+            white-space: nowrap;  
+            text-overflow:ellipsis; 
+            overflow:hidden;
+            padding: 1rem 0;
+            .td-span {
+                word-break:keep-all;           /* 不换行 */
+                white-space: nowrap;  
+                text-overflow:ellipsis; 
+                overflow:hidden;
+                display: inline-block;
+                width: 90%;
+                padding: 0 5%;
+                text-align: center
+            }
+        }
+        .ant-table-bordered .ant-table-thead > tr > th{
+            word-break:keep-all;           /* 不换行 */
+            white-space: nowrap;
+            text-align: center;
+        }
+    }
+}
