@@ -110,3 +110,33 @@ html .ant-notification {
         }
     }
 }
+
+.patent-results-home，.reimbursement{
+    .content{
+        .ant-table-bordered .ant-table-tbody > tr > td{
+            word-break:keep-all;           /* 不换行 */
+            white-space: nowrap;  
+            text-overflow:ellipsis; 
+            overflow:hidden;
+            padding: 1rem 0;
+            font-size: 0;
+            text-align: center;
+            .td-span {
+                word-break:keep-all;           /* 不换行 */
+                white-space: nowrap;  
+                text-overflow:ellipsis; 
+                overflow:hidden;
+                display: inline-block;
+                text-align: center;
+                font-size: 14px
+            }
+        }
+        .ant-table-bordered .ant-table-thead > tr > th{
+            word-break:keep-all;           /* 不换行 */
+            white-space: nowrap;
+            text-align: center;
+            padding: 16px 0;
+            text-align: center
+        }
+    }
+}
