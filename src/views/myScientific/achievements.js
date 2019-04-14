@@ -5,14 +5,22 @@ class Achievements extends Component {
     constructor(props) {
         super(props);
         this.state = {
+          //一个表格一个数据源data
             data: [{
                 key: '1',
                 name: 'John Brown',
                 money: '￥300,000.00',
                 address: 'New York No. ',
               }],
+              data2: [{
+                key: '1',
+                address: '雷国荣',
+                address1: '￥300,000.00',
+                address2: 'New York No. ',
+              }],
+              
 
-
+        //论文著作
               columns : [{
                 title: '类型',
                 dataIndex: 'name',
@@ -85,17 +93,66 @@ class Achievements extends Component {
                 width: 150,
               }],
 
+
+           //科研项目
+           columns2 : [{
+            title: '项目类型',
+            dataIndex: 'address',
+          }, {
+            title: '项目性质',
+            dataIndex: 'address1',
+          }, {
+            title: '项目名称',
+            dataIndex: 'address1',
+          }, {
+            title: '项目级别',
+            dataIndex: 'address1',
+          }, {
+            title: '立项时间',
+            dataIndex: 'address1',
+          }, {
+            title: '结题时间',
+            dataIndex: 'address1',
+          }, {
+            title: '研究状态',
+            dataIndex: 'address1',
+          }, {
+            title: '参与人数',
+            dataIndex: 'address1',
+          }, {
+            title: '本人排名',
+            dataIndex: 'address1',
+          }, {
+            title: '拨款金额',
+            dataIndex: 'address1',
+          }, {
+            title: '到款金额',
+            dataIndex: 'address1',
+          }, {
+            title: '验收结果',
+            dataIndex: 'address1',
+          }, {
+            title: '立项来源',
+            dataIndex: 'address1',
+          }, {
+            title: '立项类型',
+            dataIndex: 'address1',
+          }],
               addState: false
+
+              
         }
     }
 
     add = () =>{
+      //点击新增按项目时 函数执行的内容 就是弹框的Mode显示隐藏 这就是更改true false状态的意思
       this.setState({
         addState:!this.state.addState
       })
     }
     render() {
-        let { data, columns, addState } = this.state;
+      //这俩面的意思就是取变量 相当于 this.state.data 的意思es6的写法,比较便捷简单
+        let { data,data2, columns, columns2, addState } = this.state;
         return (
             <div className='achievements'>
               <div className='content' style={{padding: ' 20px'}}>
@@ -117,8 +174,8 @@ class Achievements extends Component {
                         <Row>
                           <Divider>科研项目</Divider>
                           <Table
-                              columns={columns}
-                              dataSource={data}
+                              columns={columns2}
+                              dataSource={data2}
                               bordered
                               pagination={false}
                               scroll={{x: 2100, y: 300}}
@@ -143,7 +200,7 @@ class Achievements extends Component {
                     onOk={this.modalOk}
                     onCancel={this.add}
                     wrapClassName='achievements-add-modal'
-                    width={2111}
+                    width={211}
                 >
                     
                 </Modal>

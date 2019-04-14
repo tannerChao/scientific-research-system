@@ -65,35 +65,55 @@ class AddProject extends Component {
                 onFilter: (value, record) => record.address.indexOf(value) === 0,
                 sorter: (a, b) => a.address.length - b.address.length,
                 sortDirections: ['descend', 'ascend'],
+              }, {
+                title: '1111',
+                dataIndex: 'address1',
+                render: text => <a href="javascript:;">{text}</a>,
+              }, {
+                title: '2222',
+                dataIndex: 'address1',
+                render: text => <a href="javascript:;">{text}</a>,
+              }, {
+                title: '3333',
+                dataIndex: 'address1',
+                render: text => <a href="javascript:;">{text}</a>,
+              }, {
+                title: '44444',
+                dataIndex: 'address1',
+                render: text => <a href="javascript:;">{text}</a>,
               }],
               //表格数据源
               data : [{ 
                 key: '1',
-                name: 'John Brown',
-                age: 32,
-                address: 'New York No. 1 Lake Park',
-                state: 'New York No. 1 Lake Park',
+                name: 'KYXM20180615154541',
+                age: '项目名称',
+                address: '已结题',
+                state: '详细',
               }, {
                 key: '2',
-                name: 'Jim Green',
-                age: 42,
-                address: 'London No. 1 Lake Park',
-                state: 'New York No. 1 Lake Park',
+                name: 'KYXM20180615154541',
+                age: '项目名称',
+                address: '已结题',
+                state: '详细',
               }, {
                 key: '3',
-                name: 'Joe Black',
-                age: 32,
-                address: 'Sidney No. 1 Lake Park',
-                state: 'New York No. 1 Lake Park',
+                name: 'KYXM20180615154541',
+                age: '项目名称',
+                address: '已结题',
+                state: '详细',
               }, {
                 key: '4',
-                name: 'Jim Red',
-                age: 32,
-                address: 'London No. 2 Lake Park',
-                state: 'New York No. 1 Lake Park',
+                name: 'KYXM20180615154541',
+                age: '项目名称',
+                address: '已结题',
+                state: '详细',
               }],
 
               modalState: false,
+              modalPage1: true,
+              modalPage2: false,
+              modalPage3: false,
+              modalSubmit: '下一步'
 
         }
     }
@@ -103,10 +123,33 @@ class AddProject extends Component {
     }
 
     modalOk = () =>{
-
+      let { modalPage1,modalPage2 } = this.state
+      if(modalPage1){
+        //假如第一个页面 ,点击了按钮,就显示 第二页 
+        this.setState({
+          modalPage1: false,
+          modalPage2:  true,
+          modalPage3: false,
+          modalSubmit:  '下一步'
+        })
+      }else if(modalPage2){
+        //假如第二个页面 ,点击了按钮,就显示 第三页 
+        this.setState({
+          modalPage1: false,
+          modalPage2: false,
+          modalPage3: true,
+          modalSubmit:  '提交'
+        })
+      }
+      
     }
     modalOnCancel = () =>{
-
+        this.setState({
+          modalState: !this.state.modalState,
+          modalPage1: true,
+          modalPage2: false,
+          modalSubmit: '下一步'
+        })
     }
     openModal = () =>{
         this.setState({
@@ -116,6 +159,8 @@ class AddProject extends Component {
     handleChange = () =>{
 
     }
+
+
     render() {
         let {columns,data,modalState} = this.state
         return (
@@ -132,13 +177,17 @@ class AddProject extends Component {
                     title="创新项目申报模块"
                     visible={modalState}
                     onOk={this.modalOk}
-                    onCancel={this.openModal}
+                    onCancel={this.modalOnCancel}
                     wrapClassName='add-project-modal'
                     width={800}
+                    okText={this.state.modalSubmit}
                 >
+                {
+                  this.state.modalPage1? <div>
                     <Row>
                         <p>第一步：输入基本信息</p>
                     </Row>
+                    {/* 你看表格1行有4列,然后就布局出这个样子了, */}
                     <Row className='add-project-modal-table'>
                         <Col span={4} className='label'>项目类别</Col>
                         <Col span={8} className='line padding-10'>
@@ -197,6 +246,15 @@ class AddProject extends Component {
                         <Col span={4} className='label'>联系方式</Col>
                         <Col span={8} className='padding-10'><InputNumber placeholder="Basic usage" /></Col>
                     </Row>
+
+                    <Row>
+                        <p>*参与者可输入姓名或卡号，用半角的逗号分割。</p>
+                    </Row>
+                  </div>:null
+                }
+                  {
+                    this.state.modalPage2?<div>第二页</div>:null
+                  }  
                 </Modal>
             </div>
 
