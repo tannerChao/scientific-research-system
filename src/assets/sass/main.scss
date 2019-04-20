@@ -55,3 +55,56 @@
         }
     }
 }
+
+.budget-home{
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    .content{
+        margin: 1rem 1.5rem;
+        background: #fff;
+        flex: 1;
+
+        
+    }
+}
+.sc-research-project-home{
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    .content{
+        margin: 1rem 1.5rem;
+        background: #fff;
+        flex: 1;
+
+        .headers{
+            title{
+                display: inline-block;
+                width: auto;
+
+            }
+        }
+    }
+}
+
+.paper-works-home{
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    .content{
+        margin: 1rem 1.5rem;
+        background: #fff;
+        flex: 1;
+
+        .headers{
+            title{
+                display: inline-block;
+                width: auto;
+
+            }
+        }
+    }
+}

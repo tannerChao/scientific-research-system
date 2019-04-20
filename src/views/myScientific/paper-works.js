@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import { Table } from 'antd';
+import { Table, Input, Row, Col, DatePicker,Button } from 'antd';
+import { filter, size } from 'lodash'
+
+const Search = Input.Search;
 
 class PaperWorks extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -104,24 +108,58 @@ class PaperWorks extends Component {
       }]
     }
   }
-  
+
+  componentWillMount(){
+  this.setState({
+    viewData : this.state.data
+  })
+  }
+
+  timeChange = () => {
+  //时间选择
+  }
+
+  finData = e => {
+    //查找数据
+    let { data } = this.state;
+    let array = filter(data,o=>{
+        return o.cardId.indexOf(e) > -1 || o.name.indexOf(e) > -1 || o.projectName.indexOf(e)> -1
+    })
+    console.log(array);
+    if(size(array)>0){
+      this.setState({
+        viewData: array
+      })
+    }
+  }
+
+  getData = () => {
+  //导出数据
+  }
+
   render() {
-    let { data, columns } = this.state;
-    
+    let { viewData, columns } = this.state;
     return (
-      <div className='home'>
-
-        <Table
-          columns={columns}
-          dataSource={data}
-          bordered
-          title={() => 'Header'}
-          
-          scroll={{ x: 1500, y: 300 }}
-        />,
-        mountNode
-      </div>
-
+        <div className='paper-works paper-works-home'>
+            <div className='content' style={{padding: ' 20px'}}>
+              <Row className='headers'>
+                <title>论文论著成果统计 </title>
+              </Row>
+              <Row gutter={16} justify='space-between' style={{padding: '10px 0'}}>
+                <Col span={4}><Search placeholder="卡号/姓名/文章论著名称/刊物或出版社关键字" onSearch={this.finData} style={{ width: '100%' }} /></Col>
+                <Col span={4}><DatePicker onChange={this.timeChange} placeholder='开始时间' style={{ width: '100%' }}/></Col>
+                <Col span={4}><Button type="primary" onClick={this.getData}>导出数据</Button></Col>
+              </Row>
+              
+                <Table
+                    width={1305}
+                    columns={columns}
+                    dataSource={viewData}
+                    scroll={{ x: 1300 }}
+                    bordered
+                />
+            </div>
+        </div>
     );
   }
 }

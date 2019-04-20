@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table } from 'antd';
+import { Table,Input, Row, Col,Button } from 'antd';
 
 class Budget extends Component {
     constructor(props) {
@@ -45,9 +45,11 @@ class Budget extends Component {
               }, {
                 title: '',
                 dataIndex: 'address1',
+                render: text => <a href="javascript:;">查看经费使用情况</a>,
               }, {
                 title: '',
                 dataIndex: 'address1',
+                render: text => <a href="javascript:;">删除</a>,
               }]
         }
     }
@@ -55,14 +57,19 @@ class Budget extends Component {
         let { data, columns } = this.state;
 
         return (
-            <div className='containers add-project'>
-                <Table
-                    columns={columns}
-                    dataSource={data}
-                    bordered
-                    title={() => 'Header'}
-                    footer={() => 'Footer'}
-                />
+            <div className='budget budget-home'>
+                <div className='content' style={{padding: ' 20px'}}>
+                    <Row gutter={16} justify='space-between' style={{padding: '10px 0'}}>
+                      <Col span={4}><Input placeholder="经费名称" />,</Col>
+                      <Col span={4}><Input placeholder="经费预算" />,</Col>
+                      <Col span={4}><Button type="primary" >添加</Button></Col>
+                    </Row>    
+                    <Table
+                        columns={columns}
+                        dataSource={data}
+                        bordered
+                    />
+                </div>          
             </div>
 
         );
