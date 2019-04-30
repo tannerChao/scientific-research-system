@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Layout, Breadcrumb, Icon, Menu, Row, Col, Input, Form } from 'antd'
+import { Layout, Breadcrumb, Icon, Menu, Row, Col, notification , Form } from 'antd'
 import { RouteWithSubRoutes } from 'router'
 import { Link } from 'react-router-dom'
 import { findIndex, get, trim } from 'lodash'
 import userImage from './../../assets/images/user-image.png'
+import { inject, observer } from "mobx-react";
 
 import { menus } from './data'
 import {
@@ -17,6 +18,10 @@ const FormItem = Form.Item;
  * @class Home
  * @extends {Component}
  */
+@inject(store=>({
+    spining:store.store.spining,
+  }))
+@observer
 class Home extends Component {
 
     state = {

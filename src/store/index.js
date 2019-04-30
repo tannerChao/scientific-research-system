@@ -1,10 +1,11 @@
 
-import sotre from './store'
-
+import store from './store'
+import budget from './budget'
 /**
  * sotre <object>
  */
 const stores = {
-    sotre
+    store,
+    budget
 }
 export default stores
