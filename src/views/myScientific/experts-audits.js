@@ -7,29 +7,29 @@ class ExpertsAudits extends Component {
         this.state = {
             data: [{
                 key: '1',
-                name: 'John Brown',
-                money: '￥300,000.00',
-                address: 'New York No. 1 Lake Park',
-                address1: 'New York No. 1 Lake Park',
+                name: 'KYXM20180615154541 Brown',
+                money: '123',
+                address: '院领导室',
+                address1: '已提交',
               }, {
                 key: '2',
-                name: 'Jim Green',
-                money: '￥1,256,000.00',
-                address: 'London No. 1 Lake Park',
-                address1: 'New York No. 1 Lake Park',
+                name: 'KYXM20180615154541',
+                money: '123',
+                address: '院领导室',
+                address1: '已提交',
               }, {
                 key: '3',
-                name: 'Joe Black',
-                money: '￥120,000.00',
-                address: 'Sidney No. 1 Lake Park',
-                address1: 'New York No. 1 Lake Park',
+                name: 'KYXM20180615154541',
+                money: '123',
+                address: '院领导室',
+                address1: '已提交',
               },
               {
                 key: '4',
-                name: 'Joe Black4',
-                money: '￥120,000.004',
-                address: 'Sidney No. 1 Lake Park4',
-                address1: 'New York No. 1 Lake Park',
+                name: 'KYXM20180615154541',
+                money: '123',
+                address: '院领导室',
+                address1: '已提交',
               }],
               columns : [{
                 title: '项目编号',
@@ -48,9 +48,11 @@ class ExpertsAudits extends Component {
               }, {
                 title: '',
                 dataIndex: 'address1',
+                render: text => <a href="javascript:;">详情</a>
               }, {
                 title: '',
                 dataIndex: 'address1',
+                render: text => <a href="javascript:;">审核</a>
               }]
         }
     }
@@ -62,8 +64,7 @@ class ExpertsAudits extends Component {
                     columns={columns}
                     dataSource={data}
                     bordered
-                    title={() => 'Header'}
-                    footer={() => 'Footer'}
+                    style={{width:1300}}
                 />
             </div>
 
