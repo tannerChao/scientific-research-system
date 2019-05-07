@@ -42,6 +42,7 @@ class Budget{
     return res
   } 
   
+  
 } 
 const _self = new Budget();
 export default _self

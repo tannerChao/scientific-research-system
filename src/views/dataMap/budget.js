@@ -96,7 +96,9 @@ class Budget extends Component {
           },
         })
       }else{
-
+        notification['error']({
+          message: res.error
+        })
       }
       this.setLoading()
 

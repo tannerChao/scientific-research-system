@@ -12,7 +12,7 @@ export const getBudget = [{
   item_number:1002,
   expenditure_items: 'it01',
   unit_price: 1002,
-  remarks:'sdsfddsfsf日够了',
+  remarks:'sdsfddsfsfdfd够了',
   entry_person: '叶嘉伟',
   del: 0,
   entry_time: new Date(),

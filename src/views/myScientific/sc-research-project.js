@@ -131,10 +131,10 @@ class ScResearchProject extends Component {
               </Row>
               
                 <Table
-                    width={1305}
+                    width={1505}
                     columns={columns}
                     dataSource={viewData}
-                    scroll={{ x: 1300 }}
+                    scroll={{ x: 1500 }}
                     bordered
                 />
             </div>

@@ -153,7 +153,7 @@ class Patentresults extends Component {
                   </Row>
                   
                     <Table
-                        width={1305}
+                        width={1300}
                         columns={columns}
                         dataSource={viewData}
                         scroll={{ x: 1300 }}

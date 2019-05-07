@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Form, Button, Table, Modal, Input, InputNumber, Select, DatePicker, Upload, message, Icon, } from 'antd';
+import { inject, observer } from "mobx-react";
+
 const Option = Select.Option;
 const { TextArea } = Input;
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
@@ -21,6 +23,11 @@ const props = {
   },
 };
 
+
+/* @inject(store=>{
+  getList: store.project.get
+}) */
+@observer
 class AddProject extends Component {
   constructor(props) {
     super(props);
@@ -87,7 +94,7 @@ class AddProject extends Component {
       }, {
         title: '',
         dataIndex: 'address1',
-        render: text => <a href="javascript:;" style={{ width: '100px', cursor: 'pointer' }}>详细</a>,
+        render: text => <a href="javascript:;" onClick={this.opendetailed} style={{ width: '100px', cursor: 'pointer' }}>详细</a>,
       }, {
         title: '',
         dataIndex: 'address1',
@@ -225,6 +232,87 @@ class AddProject extends Component {
       modalState: !this.state.modalState
     })
   }
+
+  // 详细
+  detailedOk = () => {
+    let { detailedPage1, detailedPage2, detailedPage3, detailedPage4, detailedPage5, detailedPage6 } = this.state
+    if (detailedPage1) {
+      //假如第一个页面 ,点击了按钮,就显示 第二页 
+      this.setState({
+        detailedPage1: false,
+        detailedPage2: true,
+        detailedPage3: false,
+        detailedPage4: false,
+        detailedPage5: false,
+        detailedPage6: false,
+        detailedSubmit: '下一步'
+      })
+    } else if (detailedPage2) {
+      //假如第二个页面 ,点击了按钮,就显示 第三页 
+      this.setState({
+        detailedPage1: false,
+        detailedPage2: false,
+        detailedPage3: true,
+        detailedPage4: false,
+        detailedPage5: false,
+        detailedPage6: false,
+        detailedSubmit: '下一步'
+      })
+    } else if (detailedPage3) {
+      //假如第三个页面 ,点击了按钮,就显示 第四页 
+      this.setState({
+        detailedPage1: false,
+        detailedPage2: false,
+        detailedPage3: false,
+        detailedPage4: true,
+        detailedPage5: false,
+        detailedPage6: false,
+        detailedSubmit: '下一步'
+      })
+    } else if (detailedPage4) {
+      //假如第四个页面 ,点击了按钮,就显示 第五页 
+      this.setState({
+        detailedPage1: false,
+        detailedPage2: false,
+        detailedPage3: false,
+        detailedPage4: false,
+        detailedPage5: true,
+        detailedPage6: false,
+        detailedSubmit: '下一步'
+      })
+    } else if (detailedPage5) {
+      //假如第五个页面 ,点击了按钮,就显示 第六页 
+      this.setState({
+        detailedPage1: false,
+        detailedPage2: false,
+        detailedPage3: false,
+        detailedPage4: false,
+        detailedPage5: false,
+        detailedPage6: true,
+        detailedSubmit: '提交'
+      })
+    }
+
+  }
+  detailedOnCancel = () => {
+    this.setState({
+      detailedState: !this.state.detailedState,
+      detailedPage1: true,
+      detailedPage2: false,
+      detailedPage3: false,
+      detailedPage4: false,
+      detailedPage5: false,
+      detailedPage6: false,
+      detailedSubmit: '下一步'
+    })
+  }
+  opendetailed = () => {
+    this.setState({
+      detailedState: !this.state.detailedState
+    })
+  }
+
+
   handleChange = () => {
 
   }
@@ -232,7 +320,7 @@ class AddProject extends Component {
 
 
   render() {
-    let { columns, data, modalState } = this.state
+    let { columns, data, modalState, detailedState } = this.state
     return (
       <div className='containers add-project'>
         <div className='content' style={{ padding: ' 20px' }}>
@@ -243,6 +331,8 @@ class AddProject extends Component {
             <Table columns={columns} dataSource={data} />
           </Row>
         </div>
+
+        {/* 新增项目 */}
         <Modal
           title="创新项目申报模块"
           visible={modalState}
@@ -499,6 +589,255 @@ class AddProject extends Component {
               <row>
                 <p>*可按需要上传项目申报附件。</p>
               </row>
+            </div> : null
+          }
+        </Modal>
+      
+      {/* 详细 */}
+      <Modal
+          title="创新项目申报模块"
+          visible={detailedState}
+          onOk={this.detailedOk}
+          onCancel={this.detailedOnCancel}
+          wrapClassName='add-project-modal'
+          width={800}
+          okText={this.state.detailedSubmit}
+        >
+          {
+            this.state.detailedPage1 ? <div>
+              <Row>
+                <p>基本信息</p>
+              </Row>
+              {/* 你看表格1行有4列,然后就布局出这个样子了, */}
+              <Row className='add-project-modal-table'>
+                <Col span={4} className='label'>项目类别</Col>
+                <Col span={8} className='line padding-10'>
+                  <Select defaultValue="--请选择--" style={{ width: 120 }} onChange={this.handleChange}>
+                    <Option value="#">技术开发</Option>
+                    <Option value="#">基础研究</Option>
+                    <Option value="#">应用研究</Option>
+                    <Option value="#">试验与发展</Option>
+                    <Option value="#">成果应用</Option>
+                    <Option value="#">理论研究</Option>
+                  </Select>
+                </Col>
+                <Col span={4} className='label'>项目名称</Col>
+                <Col span={8} className='padding-10'><Input /></Col>
+              </Row>
+              <Row className='add-project-modal-table'>
+                <Col span={4} className='label'>项目规模</Col>
+                <Col span={8} className='line padding-10'>
+                  <Select defaultValue="--请选择--" style={{ width: 120 }} onChange={this.handleChange}>
+                    <Option value="#">小</Option>
+                    <Option value="#">中</Option>
+                    <Option value="#">大</Option>
+                    
+                  </Select>
+                </Col>
+                <Col span={4} className='label'>人员结构</Col>
+                <Col span={8} className='padding-10'>
+                  <Select defaultValue="--请选择--" style={{ width: 120 }} onChange={this.handleChange}>
+                    <Option value="#">教师</Option>
+                    <Option value="#">师生</Option>
+                    
+                  </Select>
+                </Col>
+              </Row>
+              <Row className='add-project-modal-table'>
+                <Col span={4} className='label'>计划完成该日期</Col>
+                <Col span={8} className='line padding-10'><DatePicker onChange={this.Selectdate} /></Col>
+                <Col span={4} className='label'>参与者（教工）</Col>
+                <Col span={8} className='padding-10'><Input /></Col>
+              </Row>
+              <Row className='add-project-modal-table'>
+                <Col span={4} className='label'>成果与其形式</Col>
+                <Col span={8} className='line padding-10'>
+                  <Select defaultValue="--请选择--" style={{ width: 120 }} onChange={this.handleChange}>
+                    <Option value="#">系列论文</Option>
+                    <Option value="#">研究报告</Option>
+                    <Option value="#">成果应用报告</Option>
+                    <Option value="#">专利</Option>
+                    <Option value="#">新产品</Option>
+                    <Option value="#">新技术</Option>
+                    <Option value="#">软件登记</Option>
+                    <Option value="#">标准</Option>
+                    <Option value="#">其他</Option>
+                  </Select>
+                </Col>
+                <Col span={4} className='label'>参与者（学生）</Col>
+                <Col span={8} className='padding-10'><Input /></Col>
+              </Row>
+              <Row className='add-project-modal-table' style={{ border: '1px solid #e4e4e4' }}>
+                <Col span={4} className='label'>联系电话</Col>
+                <Col span={8} className='line padding-10'><Input /></Col>
+                <Col span={4} className='label'>联系方式</Col>
+                <Col span={8} className='padding-10'><Input /></Col>
+              </Row>
+
+            </div> : null
+          }
+          {
+            this.state.detailedPage2 ? <div><Row>
+              <p>项目分工情况</p>
+            </Row>
+              {/* 你看表格1行有4列,然后就布局出这个样子了, */}
+              <Row className='add-project-modal-table'>
+                <Col span={4} className='label'>项目类别</Col>
+                <Col span={8} className='line padding-10'>
+                  <Select defaultValue="lucy" style={{ width: 120 }} onChange={this.handleChange}>
+                    <Option value="jack">Jack</Option>
+                    <Option value="lucy">Lucy</Option>
+                    <Option value="disabled" disabled>Disabled</Option>
+                    <Option value="Yiminghe">yiminghe</Option>
+                  </Select>
+                </Col>
+                <Col span={4} className='label'>项目类别</Col>
+                <Col span={8} className='padding-10'><Input placeholder="Basic usage" /></Col>
+              </Row>
+              <Row className='add-project-modal-table'>
+                <Col span={4} className='label'>项目规模</Col>
+                <Col span={8} className='line padding-10'>
+                  <Select defaultValue="lucy" style={{ width: 120 }} onChange={this.handleChange}>
+                    <Option value="jack">Jack</Option>
+                    <Option value="lucy">Lucy</Option>
+                    <Option value="disabled" disabled>Disabled</Option>
+                    <Option value="Yiminghe">yiminghe</Option>
+                  </Select>
+                </Col>
+                <Col span={4} className='label'>人员结构</Col>
+                <Col span={8} className='padding-10'>
+                  <Select defaultValue="lucy" style={{ width: 120 }} onChange={this.handleChange}>
+                    <Option value="jack">Jack</Option>
+                    <Option value="lucy">Lucy</Option>
+                    <Option value="disabled" disabled>Disabled</Option>
+                    <Option value="Yiminghe">yiminghe</Option>
+                  </Select>
+                </Col>
+              </Row>
+              <Row className='add-project-modal-table'>
+                <Col span={4} className='label'>计划完成该日期</Col>
+                <Col span={8} className='line padding-10'><Input placeholder="Basic usage" /></Col>
+                <Col span={4} className='label'>参与者（教工）</Col>
+                <Col span={8} className='padding-10'><Input placeholder="Basic usage" /></Col>
+              </Row>
+              <Row className='add-project-modal-table'>
+                <Col span={4} className='label'>成果与其形式</Col>
+                <Col span={8} className='line padding-10'>
+                  <Select defaultValue="lucy" style={{ width: 120 }} onChange={this.handleChange}>
+                    <Option value="jack">Jack</Option>
+                    <Option value="lucy">Lucy</Option>
+                    <Option value="disabled" disabled>Disabled</Option>
+                    <Option value="Yiminghe">yiminghe</Option>
+                  </Select>
+                </Col>
+                <Col span={4} className='label'>参与者（学生）</Col>
+                <Col span={8} className='padding-10'><Input placeholder="Basic usage" /></Col>
+              </Row>
+              <Row className='add-project-modal-table' style={{ border: '1px solid #e4e4e4' }}>
+                <Col span={4} className='label'>联系电话</Col>
+                <Col span={8} className='line padding-10'><InputNumber placeholder="Basic usage" /></Col>
+                <Col span={4} className='label'>联系方式</Col>
+                <Col span={8} className='padding-10'><InputNumber placeholder="Basic usage" /></Col>
+              </Row>
+               </div> : null
+          }
+          {
+            this.state.detailedPage3 ? <div><Row>
+              <p>项目主要内容和拟解决的问题</p>
+            </Row>
+              <row>主要内容：</row>
+              <row><TextArea rows={5} /></row>
+              <row>拟解决问题：</row>
+              <row><TextArea rows={5} /></row>
+            </div> : null
+          }
+          {
+            this.state.detailedPage4 ?<div>
+                <Row><p>研究经费支出计划</p></Row>
+                <Row className='add-project-modal-table'>
+                  <Col span={10} className='label'>支出科目</Col>
+                  <Col span={4} className='label'>金额(元)</Col>
+                  <Col span={10} className='label'>用途</Col>
+
+                </Row>
+                <Row className='add-project-modal-table'>
+                  <Col span={10} className='label'>1.科研业务费</Col>
+                  <Col span={4} className='label'></Col>
+                  <Col span={10} className='label'></Col>
+                </Row>
+                <Row className='add-project-modal-table'>
+                  <Col span={10} className='label'>(1)科研测试、计算、分析、文献检索</Col>
+                  <Col span={4} className='Input'><Input /></Col>
+                  <Col span={10} className='Input'><Input /></Col>
+                </Row>
+                <Row className='add-project-modal-table'>
+                  <Col span={10} className='label'>(2)国内调研，小型会议，学术交流</Col>
+                  <Col span={4} className='Input'><Input /></Col>
+                  <Col span={10} className='Input'><Input /></Col>
+                </Row>
+                <Row className='add-project-modal-table' >
+                  <Col span={10} className='label'>(3)科研劳务费</Col>
+                  <Col span={4} className='Input'><Input /></Col>
+                  <Col span={10} className='Input'><Input /></Col>
+                </Row>
+                <Row className='add-project-modal-table' >
+                  <Col span={10} className='label'>2.图书资料费</Col>
+                  <Col span={4} className='Input'><Input /></Col>
+                  <Col span={10} className='Input'><Input /></Col>
+                </Row>
+                <Row className='add-project-modal-table' >
+                  <Col span={10} className='label'>3.实验、材料费</Col>
+                  <Col span={4} className='Input'><Input /></Col>
+                  <Col span={10} className='Input'><Input /></Col>
+                </Row>
+
+                
+              </div> : null
+          }
+          {
+            this.state.detailedPage5 ?<div>
+                <Row><p>研究进度及阶段性成果</p></Row>
+                <Row className='add-project-modal-table'>
+                  <Col span={8} className='label'>研究进度</Col>
+                  <Col span={16} className='label'>成果形式</Col>
+                </Row>
+                <Row className='add-project-modal-table'>
+                  <Col span={8} className='label'><MonthPicker onChange={this.Selectdate} placeholder="选择年月" style={{ width: '100px' }} />至<MonthPicker onChange={this.Selectdate} placeholder="选择年月" style={{ width: '100px' }} /></Col>
+                  <Col span={16} className='label'><Input /></Col>
+                </Row>
+                <Row className='add-project-modal-table'>
+                  <Col span={8} className='label'><MonthPicker onChange={this.Selectdate} placeholder="选择年月" style={{ width: '100px' }} />至<MonthPicker onChange={this.Selectdate} placeholder="选择年月" style={{ width: '100px' }} /></Col>
+                  <Col span={16} className='label'><Input /></Col>
+                </Row>
+                <Row className='add-project-modal-table'>
+                  <Col span={8} className='label'><MonthPicker onChange={this.Selectdate} placeholder="选择年月" style={{ width: '100px' }} />至<MonthPicker onChange={this.Selectdate} placeholder="选择年月" style={{ width: '100px' }} /></Col>
+                  <Col span={16} className='label'><Input /></Col>
+                </Row>
+                <Row className='add-project-modal-table'>
+                  <Col span={8} className='label'><MonthPicker onChange={this.Selectdate} placeholder="选择年月" style={{ width: '100px' }} />至<MonthPicker onChange={this.Selectdate} placeholder="选择年月" style={{ width: '100px' }} /></Col>
+                  <Col span={16} className='label'><Input /></Col>
+                </Row>
+                <Row className='add-project-modal-table'>
+                  <Col span={8} className='label'><MonthPicker onChange={this.Selectdate} placeholder="选择年月" style={{ width: '100px' }} />至<MonthPicker onChange={this.Selectdate} placeholder="选择年月" style={{ width: '100px' }} /></Col>
+                  <Col span={16} className='label'><Input /></Col>
+                </Row>
+                <Row className='add-project-modal-table'>
+                  <Col span={8} className='label'><MonthPicker onChange={this.Selectdate} placeholder="选择年月" style={{ width: '100px' }} />至<MonthPicker onChange={this.Selectdate} placeholder="选择年月" style={{ width: '100px' }} /></Col>
+                  <Col span={16} className='label'><Input /></Col>
+                </Row>
+              </div> : null
+          }
+          {
+            this.state.detailedPage6 ? <div><Row>
+              <p>附件</p>
+            </Row>
+              <row><Upload {...props}>
+                <Button>
+                  <Icon type="upload" /> 点击上传文件
+                </Button>
+              </Upload>,
+              </row>
+              
             </div> : null
           }
         </Modal>
