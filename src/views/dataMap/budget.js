@@ -172,7 +172,7 @@ class Budget extends Component {
     }
 
     render() {
-        let { data, columns, spining } = this.state;
+        let { data, columns, spining, auditState, confirmLoading, auditObject, auditValue } = this.state;
 
         return (
             <div className='budget budget-home'>

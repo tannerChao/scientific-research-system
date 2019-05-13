@@ -56,13 +56,14 @@ class ScientificManagement extends Component {
         let { data, columns } = this.state;
         
         return (
-            <div className='home'>
+            <div className='scientific-management'>
+              <div className='content'>
                 <Table
-                    columns={columns}
-                    dataSource={data}
-                    bordered
-                    style={{width:1300}}
-                />
+                      columns={columns}
+                      dataSource={data}
+                      bordered
+                  />
+              </div>     
             </div>
 
         );

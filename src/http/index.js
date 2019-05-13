@@ -2,6 +2,7 @@ import _axios from './interceptors';
 import _ from 'lodash'
 import { getBaseUrl, getToken } from '../utils';
 import  * as datas from '../utils'
+import { resolve } from 'promise/lib/es6-extensions';
 
 const OPEN_AXIOS = false;
 const axios = _axios.create()
@@ -27,13 +28,19 @@ export default (method, data, header) => {
             data
         });
     }else{
-        console.log(datas);
-        return {
-            code: 0,
-            success: true,
-            error: '',
-            result: datas[method]
-        };
+        let promise = new Promise(resolve=>{
+            setTimeout(()=>{
+                resolve({
+                    code: 0,
+                    success: true,
+                    error: '',
+                    result: datas[method]
+            })
+            },2000)
+        }) 
+        return promise.then((result)=>{
+            return result;
+        })
     }
     
 };

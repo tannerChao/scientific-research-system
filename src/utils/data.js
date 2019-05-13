@@ -30,3 +30,118 @@ export const getBudget = [{
 }]
 
 export const deleteBudget = {}
+
+export const getProject = [{
+  item_number: 'dnf1211111',
+  project_name: '学校工程',
+  department: '雷国荣',
+  project_Leader: '雷国荣',
+  budgetary_funds: 1000,
+  declare_date: new Date(),
+  college_opinions: '通过',
+  state: 0,
+  storage_time: new Date(),
+  entry_person: new Date(),
+  submission_time: '雷国荣',
+  execution_state: 0,
+  telephone: 13128888888,
+  project_type: 1,
+  start_date: new Date(),
+  end_date: new Date(),
+  del: 0
+},
+{
+  item_number: 'dnf1211111',
+  project_name: '学校工程',
+  department: '雷国荣',
+  project_Leader: '罗永健',
+  budgetary_funds: 1000,
+  declare_date: new Date(),
+  college_opinions: '通过',
+  state: 0,
+  storage_time: new Date(),
+  entry_person: new Date(),
+  submission_time: '罗永健',
+  execution_state: 0,
+  telephone: 13128888888,
+  project_type: 1,
+  start_date: new Date(),
+  end_date: new Date(),
+  del: 0
+},
+{
+  item_number: 'dnf1211111',
+  project_name: '学校工程',
+  department: '雷国荣',
+  project_Leader: '业绩外',
+  budgetary_funds: 1000,
+  declare_date: new Date(),
+  college_opinions: '通过',
+  state: 0,
+  storage_time: new Date(),
+  entry_person: new Date(),
+  submission_time: '叶嘉伟',
+  execution_state: 0,
+  telephone: 13128888888,
+  project_type: 1,
+  start_date: new Date(),
+  end_date: new Date(),
+  del: 0
+}];
+
+export const addProject = {};
+export const editorProject = {};
+export const endingProject = {};
+export const upLoadProjectFile = {};
+
+export const getFinancial=[
+  {
+    item_number: 'dnf1211111',
+    project_name: '学校工程',
+    department: '信息工程系',
+    state: 0
+  },{
+    item_number: 'dnf1211111',
+    project_name: '学校工程',
+    department: '信息工程系',
+    state: 0
+  },
+  {
+    item_number: 'dnf1211111',
+    project_name: '学校工程',
+    department: '信息工程系',
+    state: 0
+  },
+  {
+    item_number: 'dnf1211111',
+    project_name: '学校工程',
+    department: '信息工程系',
+    state: 0
+  }
+]
+
+export const getExperts=[
+  {
+    item_number: 'dnf1211111',
+    project_name: '学校工程',
+    department: '信息工程系',
+    state: 0
+  },{
+    item_number: 'dnf1211111',
+    project_name: '学校工程',
+    department: '信息工程系',
+    state: 1
+  },
+  {
+    item_number: 'dnf1211111',
+    project_name: '学校工程',
+    department: '信息工程系',
+    state: 1
+  },
+  {
+    item_number: 'dnf1211111',
+    project_name: '学校工程',
+    department: '信息工程系',
+    state: 0
+  }
+]

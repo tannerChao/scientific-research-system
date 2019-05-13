@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Row, Col, Form, Button, Table, Modal, Input, InputNumber, Select, DatePicker, Upload, message, Icon, } from 'antd';
+import { Row, Col, notification, Button, Table, Modal, Input, InputNumber, Select, DatePicker, Upload, message, Icon, } from 'antd';
 import { inject, observer } from "mobx-react";
+import { Loading } from '../../components'
 
 const Option = Select.Option;
 const { TextArea } = Input;
@@ -24,9 +25,9 @@ const props = {
 };
 
 
-/* @inject(store=>{
-  getList: store.project.get
-}) */
+ @inject(store=>({
+  get_project: store.project.getProject
+})) 
 @observer
 class AddProject extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class AddProject extends Component {
       //表格的列名，以及每一列的有什么功能
       columns: [{
         title: '项目编号',
-        dataIndex: 'name',
+        dataIndex: 'item_number',
         filters: [{
           text: 'Joe',
           value: 'Joe',
@@ -60,12 +61,12 @@ class AddProject extends Component {
         sortDirections: ['descend'],
       }, {
         title: '项目名称',
-        dataIndex: 'age',
+        dataIndex: 'project_name',
         defaultSortOrder: 'descend',
         sorter: (a, b) => a.age - b.age,
       }, {
         title: '执行状态',
-        dataIndex: 'address',
+        dataIndex: 'execution_state',
         filters: [{
           text: 'London',
           value: 'London',
@@ -79,7 +80,7 @@ class AddProject extends Component {
         sortDirections: ['descend', 'ascend'],
       }, {
         title: '状态',
-        dataIndex: 'address',
+        dataIndex: 'state',
         filters: [{
           text: 'London',
           value: 'London',
@@ -145,6 +146,37 @@ class AddProject extends Component {
       modalSubmit: '下一步'
 
     }
+  }
+
+  componentDidMount(){
+    this.getProject({
+      pageSize: 1,
+      pageRow: 10,
+    })
+  }
+
+  getProject = async info => {
+    let { get_project } = this.props;
+    this.setLoading()
+    let res = await get_project({
+      ...info
+    });
+    if(res.code===0 && res.success){
+      this.setState({
+        data: res.result
+      })
+    }else{
+      notification['error']({
+        message: res.error
+      })
+    }
+    this.setLoading();
+  }
+
+  setLoading = () =>{
+    this.setState({
+      spining: !this.state.spining
+    }) 
   }
 
   onChange = (pagination, filters, sorter) => {
@@ -320,7 +352,7 @@ class AddProject extends Component {
 
 
   render() {
-    let { columns, data, modalState, detailedState } = this.state
+    let { columns, data, modalState, detailedState, spining} = this.state
     return (
       <div className='containers add-project'>
         <div className='content' style={{ padding: ' 20px' }}>
@@ -603,8 +635,7 @@ class AddProject extends Component {
           width={800}
           okText={this.state.detailedSubmit}
         >
-          {
-            this.state.detailedPage1 ? <div>
+            <div>
               <Row>
                 <p>基本信息</p>
               </Row>
@@ -674,8 +705,7 @@ class AddProject extends Component {
                 <Col span={8} className='padding-10'><Input /></Col>
               </Row>
 
-            </div> : null
-          }
+            </div>
           {
             this.state.detailedPage2 ? <div><Row>
               <p>项目分工情况</p>
@@ -841,6 +871,7 @@ class AddProject extends Component {
             </div> : null
           }
         </Modal>
+        <Loading spinning={spining} size="large" />
       </div>
 
     );
