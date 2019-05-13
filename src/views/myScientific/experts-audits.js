@@ -52,7 +52,7 @@ class ExpertsAudits extends Component {
             }, {
               title: '',
               dataIndex: '',
-              render: text => <a href="javascript:;">详情</a>
+              render: (text,record,index) => <a href="javascript:;" onClick={()=>{this.opendetailed(text,record,index)}}>详情</a>
             }, {
               title: '',
               dataIndex: '',

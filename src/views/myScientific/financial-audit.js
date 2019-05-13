@@ -51,7 +51,7 @@ class FinancialAudit extends Component {
             }, {
               title: '',
               dataIndex: 'address1',
-              render: text => <a href="javascript:;">详情</a>
+              render: (text,record,index) => <a href="javascript:;" onClick={()=>{this.opendetailed(text,record,index)}}>详情</a>
             }, {
               title: '',
               dataIndex: 'address1',
@@ -170,20 +170,6 @@ class FinancialAudit extends Component {
     this.setState({
       detailedState: !this.state.detailedState
     })
-  }
-
-  detailedOk = (e) => {
-    console.log(e);
-    this.setState({
-      visible: false,
-    });
-  }
-
-  detailedCancel = (e) => {
-    console.log(e);
-    this.setState({
-      visible: false,
-    });
   }
 
   render() {
