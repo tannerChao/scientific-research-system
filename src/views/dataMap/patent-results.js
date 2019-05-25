@@ -10,33 +10,33 @@ class Patentresults extends Component {
         this.state = {
             data: [{
                 key: '1',
-                cardId: 'John Brown',
-                name: '￥300,000.00',
-                projectType: 'New York No. 1 Lake Park',
-                projectAttr: 'New York No. 1 Lake Park',
-                projectName: '学校',
+                cardId: '88001',
+                name: '雷国荣',
+                projectType: '技术研究',
+                projectAttr: '####',
+                projectName: '状态数据采集平台',
               }, {
                 key: '2',
-                cardId: 'Jim Green',
-                name: '￥1,256,000.00',
-                projectType: 'London No. 1 Lake Park',
-                projectAttr: 'New York No. 1 Lake Park',
-                projectName: '老师',
+                cardId: '88001',
+                name: '雷国荣',
+                projectType: '技术研究',
+                projectAttr: '####',
+                projectName: '状态数据采集平台',
               }, {
                 key: '3',
-                cardId: 'Joe Black',
-                name: '￥120,000.00',
-                projectType: 'Sidney No. 1 Lake Park',
-                projectAttr: 'New York No. 1 Lake Park',
-                projectName: '学生',
+                cardId: '88001',
+                name: '雷国荣',
+                projectType: '技术研究',
+                projectAttr: '####',
+                projectName: '状态数据采集平台',
               },
               {
                 key: '4',
-                cardId: 'Joe Black4',
-                name: '￥120,000.004',
-                projectType: 'Sidney No. 1 Lake Park4',
-                projectAttr: 'New York No. 1 Lake Park',
-                projectName: '家属',
+                cardId: '88001',
+                name: '雷国荣',
+                projectType: '技术研究',
+                projectAttr: '####',
+                projectName: '状态数据采集平台',
               }],
 
               viewData: [],
@@ -44,44 +44,44 @@ class Patentresults extends Component {
               columns : [{
                 title: '卡号',
                 dataIndex: 'cardId',
-                render: text => <span href="javascript:;" className='td-span' style={{width:'100px'}}>{text}</span>,
-                width: 100
+                render: text => <span href="javascript:;" className='td-span' >{text}</span>,
+                
               }, {
                 title: '姓名',
                 className: 'column-money',
                 dataIndex: 'name',
-                render: text => <span href="javascript:;" className='td-span' style={{width:'100px'}}>{text}</span>,
-                width: 100
+                render: text => <span href="javascript:;" className='td-span' >{text}</span>,
+               
               }, {
                 title: '项目类型',
                 dataIndex: 'projectType',
-                render: text => <span href="javascript:;" className='td-span' style={{width:'100px'}}>{text}</span>,
-                width: 100
+                render: text => <span href="javascript:;" className='td-span' >{text}</span>,
+                
               }, {
                 title: '项目性质',
                 dataIndex: 'projectAttr',
-                render: text => <span href="javascript:;" className='td-span' style={{width:'100px'}}>{text}</span>,
-                width: 100
+                render: text => <span href="javascript:;" className='td-span' >{text}</span>,
+               
               }, {
                 title: '项目名称',
                 dataIndex: 'projectName',
-                render: text => <span href="javascript:;" className='td-span' style={{width:'100px'}}>{text}</span>,
-                width: 250
+                render: text => <span href="javascript:;" className='td-span' >{text}</span>,
+                
               }, {
                 title: '项目级别',
                 dataIndex: 'projectLevel',
-                render: text => <span href="javascript:;" className='td-span' style={{width:'100px'}}>{text}</span>,
-                width: 20
+                render: text => <span href="javascript:;" className='td-span' >{text}</span>,
+                
               }, {
                 title: '立项时间',
                 dataIndex: 'projectStartTime',
-                render: text => <span href="javascript:;" className='td-span' style={{width:'100px'}}>{text}</span>,
-                width: 250
+                render: text => <span href="javascript:;" className='td-span' >{text}</span>,
+                
               }, {
                 title: '结题时间',
                 dataIndex: 'projectEndTime',
-                render: text => <span href="javascript:;" className='td-span' style={{width:'100px'}}>{text}</span>,
-                width: 250
+                render: text => <span href="javascript:;" className='td-span' >{text}</span>,
+                
               }, {
                 title: '研究状态',
                 dataIndex: 'projectState',
@@ -153,10 +153,10 @@ class Patentresults extends Component {
                   </Row>
                   
                     <Table
-                        width={1300}
+                        width={1600}
                         columns={columns}
                         dataSource={viewData}
-                        scroll={{ x: 1300 }}
+                        scroll={{ x: 1600 }}
                         bordered
                     />
                 </div>
