@@ -562,12 +562,44 @@ uploadCancel = (e) => {
               <Col span={5} className='padding-10'>项目申请人</Col>
             </Row>
             <Row className='add-project-modal-table'>
-            <Col span={2} className='label'>1</Col>
-              <Col span={4} className='line padding-10'>88001</Col>
-              <Col span={4} className='label'>叶嘉伟</Col>
-              <Col span={4} className='padding-10'>教师</Col>
-              <Col span={5} className='label'>计算机应用副教授</Col>
-              <Col span={5} className='padding-10'>项目负责人</Col>
+            <Col span={2} className='label'>2</Col>
+              <Col span={4} className='line padding-10'><Input /></Col>
+              <Col span={4} className='label'><Input /></Col>
+              <Col span={4} className='padding-10'><Input /></Col>
+              <Col span={5} className='label'><Input /></Col>
+              <Col span={5} className='padding-10'><Input /></Col>
+            </Row>
+            <Row className='add-project-modal-table'>
+            <Col span={2} className='label'>3</Col>
+              <Col span={4} className='line padding-10'><Input /></Col>
+              <Col span={4} className='label'><Input /></Col>
+              <Col span={4} className='padding-10'><Input /></Col>
+              <Col span={5} className='label'><Input /></Col>
+              <Col span={5} className='padding-10'><Input /></Col>
+            </Row>
+            <Row className='add-project-modal-table'>
+            <Col span={2} className='label'>4</Col>
+              <Col span={4} className='line padding-10'><Input /></Col>
+              <Col span={4} className='label'><Input /></Col>
+              <Col span={4} className='padding-10'><Input /></Col>
+              <Col span={5} className='label'><Input /></Col>
+              <Col span={5} className='padding-10'><Input /></Col>
+            </Row>
+            <Row className='add-project-modal-table'>
+            <Col span={2} className='label'>5</Col>
+              <Col span={4} className='line padding-10'><Input /></Col>
+              <Col span={4} className='label'><Input /></Col>
+              <Col span={4} className='padding-10'><Input /></Col>
+              <Col span={5} className='label'><Input /></Col>
+              <Col span={5} className='padding-10'><Input /></Col>
+            </Row>
+            <Row className='add-project-modal-table'>
+            <Col span={2} className='label'>6</Col>
+              <Col span={4} className='line padding-10'><Input /></Col>
+              <Col span={4} className='label'><Input /></Col>
+              <Col span={4} className='padding-10'><Input /></Col>
+              <Col span={5} className='label'><Input /></Col>
+              <Col span={5} className='padding-10'><Input /></Col>
             </Row>
 
               <Row>
