@@ -36,105 +36,39 @@ class AddProject extends Component {
       //表格的列名，以及每一列的有什么功能
       columns: [{
         title: '项目编号',
-        dataIndex: 'item_number',
-        filters: [{
-          text: 'Joe',
-          value: 'Joe',
-        }, {
-          text: 'Jim',
-          value: 'Jim',
-        }, {
-          text: 'Submenu',
-          value: 'Submenu',
-          children: [{
-            text: 'Green',
-            value: 'Green',
-          }, {
-            text: 'Black',
-            value: 'Black',
-          }],
-        }],
-        // specify the condition of filtering result
-        // here is that finding the name started with `value`
-        onFilter: (value, record) => record.name.indexOf(value) === 0,
-        sorter: (a, b) => a.name.length - b.name.length,
-        sortDirections: ['descend'],
+        dataIndex: 'card',
       }, {
         title: '项目名称',
-        dataIndex: 'project_name',
+        dataIndex: 'name',
         defaultSortOrder: 'descend',
         sorter: (a, b) => a.age - b.age,
       }, {
         title: '执行状态',
-        dataIndex: 'execution_state',
-        filters: [{
-          text: 'London',
-          value: 'London',
-        }, {
-          text: 'New York',
-          value: 'New York',
-        }],
-        filterMultiple: false,
-        onFilter: (value, record) => record.address.indexOf(value) === 0,
-        sorter: (a, b) => a.address.length - b.address.length,
-        sortDirections: ['descend', 'ascend'],
+        dataIndex: 'executionStatus',
+        render: text => <span>{this.getExecutionStatus(text)}</span>
       }, {
         title: '状态',
-        dataIndex: 'state',
-        filters: [{
-          text: 'London',
-          value: 'London',
-        }, {
-          text: 'New York',
-          value: 'New York',
-        }],
-        filterMultiple: false,
-        onFilter: (value, record) => record.address.indexOf(value) === 0,
-        sorter: (a, b) => a.address.length - b.address.length,
-        sortDirections: ['descend', 'ascend'],
+        dataIndex: 'status',
+        render: text => <span>{this.getExecutionStatus(text)}</span>
       }, {
         title: '',
-        dataIndex: 'address1',
+        dataIndex: '',
         render: text => <a href="javascript:;" onClick={this.opendetailed} style={{ width: '100px', cursor: 'pointer' }}>详细</a>,
       }, {
         title: '',
-        dataIndex: 'address1',
+        dataIndex: '',
         render: text => <a href="javascript:;" onClick={this.openedit} style={{ width: '100px', cursor: 'pointer' }}>编辑</a>,
       }, {
         title: '',
-        dataIndex: 'address1',
+        dataIndex: '',
         render: text => <a href="javascript:;" onClick={this.uploadModal} style={{ width: '100px', cursor: 'pointer' }}>上传附件</a>,
       }, {
         title: '',
-        dataIndex: 'address1',
+        dataIndex: '',
         render: text => <a href="javascript:;" onClick={this.conqtModal} style={{ width: '100px', cursor: 'pointer' }}>结题</a>,
       }],
       //表格数据源
-      data: [{
-        key: '1',
-        name: 'KYXM20180615154541',
-        age: '项目名称',
-        address: '已结题',
-        state: '详细',
-      }, {
-        key: '2',
-        name: 'KYXM20180615154541',
-        age: '项目名称',
-        address: '已结题',
-        state: '详细',
-      }, {
-        key: '3',
-        name: 'KYXM20180615154541',
-        age: '项目名称',
-        address: '已结题',
-        state: '详细',
-      }, {
-        key: '4',
-        name: 'KYXM20180615154541',
-        age: '项目名称',
-        address: '已结题',
-        state: '详细',
-      }],
+      data: [],
 
       modalState: false,
       modalPage1: true,
@@ -163,7 +97,7 @@ class AddProject extends Component {
     });
     if(res.code===0 && res.success){
       this.setState({
-        data: res.result
+        data: res.data
       })
     }else{
       notification['error']({
@@ -177,6 +111,25 @@ class AddProject extends Component {
     this.setState({
       spining: !this.state.spining
     }) 
+  }
+
+  getExecutionStatus = state =>{
+    let status = '未审核'
+    switch(state){
+      case 0:
+        status= '未审核'
+        break;
+      case 1:
+        status= '审核中'
+        break;
+      case 2:
+        status= '已完结'
+        break;
+      case 3:
+        status= '已取消'
+        break;
+    }
+    return status
   }
 
   onChange = (pagination, filters, sorter) => {

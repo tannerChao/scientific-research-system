@@ -1,11 +1,10 @@
-import _axios from './interceptors';
+import axios from './interceptors';
 import _ from 'lodash'
 import { getBaseUrl, getToken } from '../utils';
 import  * as datas from '../utils'
 import { resolve } from 'promise/lib/es6-extensions';
 
 const OPEN_AXIOS = true;
-const axios = _axios.create()
 //请求超时
 axios.defaults.timeout = 30000;
 

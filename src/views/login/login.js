@@ -1,76 +1,100 @@
-import React, { Component } from 'react'
-import { Form, Icon, Input, Button } from 'antd';
-import { Link } from 'react-router-dom'
+import { Form, Icon, Input, Button, Checkbox, notification } from 'antd';
+import React, { Component } from 'react';
+import { inject, observer } from "mobx-react";
+import { Loading } from '../../components'
 
-/**
- * 密码/验证码登录
- * @export
- * @class Login
- * @extends {Component}
- */
-function hasErrors(fieldsError) {
-    return Object.keys(fieldsError).some(field => fieldsError[field]);
-}
+@inject(store=>({
+    login:store.user.getLogin,
+    setUserinfo: store.user.setUserinfo,
+}))
+@observer
+class Login extends Component {
 
-
-export class Login extends Component {
-    componentDidMount() {
-        // To disabled submit button at the beginning.
-        this.props.form.validateFields();
+    constructor(props){
+        super(props)
+        this.state={
+            spining: false
+        }
     }
+
+    setLoading = () =>{
+        this.setState({
+            spining: !this.state.spining
+        }) 
+    }
+
     handleSubmit = e => {
+    
+        const { login, setUserinfo } = this.props;
+
         e.preventDefault();
-        this.props.form.validateFields((err, values) => {
+        this.props.form.validateFields(async (err, values) => {
+            const { username, password } = values;
             if (!err) {
-                console.log('Received values of form: ', values);
+                this.setLoading()
+                let res = await login({
+                    username, password
+                })
+                if( res.code === 0 && res.success){
+                    setUserinfo({
+                        ...res.data
+                    })
+                    this.props.history.push('/home')
+                }else{
+                    notification['error']({
+                        message: res.message
+                    })
+                }
+                this.setLoading()
             }
         });
     };
-    render() {
-        const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
 
-        // Only show error after a field is touched.
-        const usernameError = isFieldTouched('username') && getFieldError('username');
-        const passwordError = isFieldTouched('password') && getFieldError('password');
-        return (
-            <div>
-                <Form layout="inline" onSubmit={this.handleSubmit}>
-                    <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
-                        {getFieldDecorator('username', {
-                            rules: [{ required: true, message: 'Please input your username!' }],
-                        })(
-                            <Input
-                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                placeholder="Username"
-                            />,
-                        )}
-                    </Form.Item>
-                    <Form.Item validateStatus={passwordError ? 'error' : ''} help={passwordError || ''}>
-                        {getFieldDecorator('password', {
-                            rules: [{ required: true, message: 'Please input your Password!' }],
-                        })(
-                            <Input
-                                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                type="password"
-                                placeholder="Password"
-                            />,
-                        )}
-                    </Form.Item>
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
-                            Log in
-                        </Button>
-                    </Form.Item>
-                </Form>
-            </div>
-        )
-    }
+  render() {
+    const { spining } = this.state
+    const { getFieldDecorator } = this.props.form;
+    return (
+        <div className="login">
+            <Form onSubmit={this.handleSubmit} className="login-form">
+                <Form.Item>
+                {getFieldDecorator('username', {
+                    rules: [{ required: true, message: '请输入用户账号!' }],
+                })(
+                    <Input
+                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    placeholder="请输入用户账号"
+                    />,
+                )}
+                </Form.Item>
+                <Form.Item style={{ marginBottom: '0px' }}>
+                {getFieldDecorator('password', {
+                    rules: [{ required: true, message: '请输入用户密码!' }],
+                })(
+                    <Input
+                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    type="password"
+                    placeholder="请输入用户密码"
+                    />,
+                )}
+                </Form.Item>
+                <Form.Item>
+                {getFieldDecorator('remember', {
+                    valuePropName: 'checked',
+                    initialValue: true,
+                })(<Checkbox>记住密码</Checkbox>)}
+                <Button type="primary" htmlType="submit" className="login-form-button">
+                    登 录
+                </Button>
+                </Form.Item>
+            </Form>
+            <Loading spinning={spining} size="large" /> 
+        </div> 
+    );
+  }
 }
 
-const WrappedHorizontalLoginForm = Form.create({ name: 'horizontal_login' })(HorizontalLoginForm);
-
-ReactDOM.render(<WrappedHorizontalLoginForm />, mountNode);
-
+Login = Form.create({ name: 'login' })(Login);
+export { Login }
 
 // export class Login extends Component {
 //     render(){

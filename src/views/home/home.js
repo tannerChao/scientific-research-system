@@ -20,6 +20,7 @@ const FormItem = Form.Item;
  */
 @inject(store=>({
     spining:store.store.spining,
+    getUserinfo: store.user.getUserinfo
   }))
 @observer
 class Home extends Component {
@@ -84,10 +85,9 @@ sugguest = () => {
 render() {
     const { Header, Content } = Layout,
         { getFieldDecorator } = this.props.form,
-        { match, routes, location, onRouteChange } = this.props
+        { match, routes, location, onRouteChange, getUserinfo } = this.props
     let locations = location.pathname.substring(0, location.pathname.lastIndexOf('/'));
-    // locationsId=findIndex(routes,o=>locations.indexOf(o.path));
-    // console.log(routes,match,this.props,'--',locations);
+
     console.log(this.state.index);
     return (
         <Layout className='home' style={{ minHeight: '100vh' }}>
@@ -116,7 +116,7 @@ render() {
 
                             <Col className="header-cursor" onClick={this.sugguest}>意见反馈</Col>
                             <Col>积分</Col>
-                            <Col><img src={userImage} alt='头像' style={{ marginRight: 8 }} />用户名</Col>
+                            <Col><img src={userImage} alt='头像' style={{ marginRight: 8 }} />{get(getUserinfo(), 'name')||`用户名`}</Col>
                         </Row>
                     </div>
                 </Header>

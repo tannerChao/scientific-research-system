@@ -10,8 +10,7 @@ export const setToken = info => {
 }
 
 export const getBaseUrl = () => {
-    console.log(process.env.NODE_ENV)
-    return process.env.NODE_ENV === 'http://192.168.1.104:9090' ? '' : 'http://192.168.1.104:9090'
+    return process.env.NODE_ENV === 'http://192.168.1.240:3000' ? '' : 'http://192.168.1.240:3000'
 }
 
 export const getTestState = (name, state = true) => {

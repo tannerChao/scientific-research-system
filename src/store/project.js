@@ -21,7 +21,7 @@ class Project{
    * @return: {code:0,success:true} 
    */
   async getProject(info){  
-    let res =await  http('getProject',info)
+    let res =await  http('/methods/project/getList',info)
     return res
   }
 
@@ -33,7 +33,7 @@ class Project{
    * @return: {code:0,success:true} 
    */
   async setProject(info){  
-    let res =await  http('setProject',info)
+    let res =await  http('/methods/project/add',info)
     return res
   }
 
@@ -45,7 +45,7 @@ class Project{
    * @return: {code:0,success:true} 
    */
   async editorProject(info){  
-    let res =await  http('editorProject',info)
+    let res =await  http('/methods/project/editor',info)
     return res
   } 
 
@@ -57,7 +57,7 @@ class Project{
    * @return: {code:0,success:true} 
    */
   async endingProject(info){  
-    let res =await  http('endingProject',info)
+    let res =await  http('/methods/project/ending',info)
     return res
   } 
 
@@ -69,7 +69,7 @@ class Project{
    * @return: {code:0,success:true} 
    */
   async upLoadProjectFile(info){  
-    let res =await  http('upLoadProjectFile',info)
+    let res =await  http('/methods/project/upLoadProjectFile',info)
     return res
   } 
   
