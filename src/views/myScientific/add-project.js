@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, notification, Button, Table, Modal, Input, InputNumber, Select, DatePicker, Upload, message, Icon, } from 'antd';
 import { inject, observer } from "mobx-react";
 import { Loading } from '../../components'
+import { get } from 'lodash'
 
 const Option = Select.Option;
 const { TextArea } = Input;
@@ -53,7 +54,7 @@ class AddProject extends Component {
       }, {
         title: '',
         dataIndex: '',
-        render: text => <a href="javascript:;" onClick={this.opendetailed} style={{ width: '100px', cursor: 'pointer' }}>详细</a>,
+        render: (text,record,index) => <a href="javascript:;" onClick={()=>{this.opendetailed(text,record,index)}} style={{ width: '100px', cursor: 'pointer' }}>详细</a>,
       }, {
         title: '',
         dataIndex: '',
@@ -220,9 +221,11 @@ class AddProject extends Component {
 
   // 详细
 
-  opendetailed = () => {
+  opendetailed = (text,record,index) => {
+    console.log(record)
     this.setState({
-      detailedState: !this.state.detailedState
+      detailedState: !this.state.detailedState,
+      detailData: record 
     })
   }
 
@@ -372,7 +375,7 @@ uploadCancel = (e) => {
 
 
   render() {
-    let { columns, data, modalState, detailedState, editState, conqtState, uploadState} = this.state
+    let { columns, data, modalState, detailedState, editState, conqtState, uploadState, detailData } = this.state
     return (
       <div className='containers add-project'>
         <div className='content' style={{ padding: ' 20px' }}>
@@ -684,41 +687,41 @@ uploadCancel = (e) => {
               {/* 你看表格1行有4列,然后就布局出这个样子了, */}
               <Row className='add-project-modal-table'>
                 <Col span={4} className='label'>项目名称</Col>
-                <Col span={8} className='padding-10'>状态数据采集平台</Col>
+                <Col span={8} className='padding-10'>{get(detailData,'name')||''}</Col>
                 <Col span={4} className='label'>项目类别</Col>
-                <Col span={8} className='line padding-10'>理论研究</Col>
+                <Col span={8} className='line padding-10'>{get(detailData,'type')||''}</Col>
                 
               </Row>
               <Row className='add-project-modal-table'>
                 <Col span={4} className='label'>项目性质</Col>
-                <Col span={8} className='padding-10'>############</Col>
+                <Col span={8} className='padding-10'>{get(detailData,'quality')||''}</Col>
                 <Col span={4} className='label'>项目级别</Col>
-                <Col span={8} className='line padding-10'>###########</Col>
+                <Col span={8} className='line padding-10'>{get(detailData,'level')||''}</Col>
                 
               </Row>
               <Row className='add-project-modal-table'>
                 <Col span={4} className='label'>项目规模</Col>
-                <Col span={8} className='line padding-10'>大</Col>
+                <Col span={8} className='line padding-10'>{get(detailData,'size')||''}</Col>
                 <Col span={4} className='label'>人员结构</Col>
-                <Col span={8} className='padding-10'>师生</Col>
+                <Col span={8} className='padding-10'>{get(detailData,'personStructure')||''}</Col>
               </Row>
               <Row className='add-project-modal-table'>
                 <Col span={4} className='label'>计划完成该日期</Col>
-                <Col span={8} className='line padding-10'>2019/5/8</Col>
+                <Col span={8} className='line padding-10'>{get(detailData,'planEndTime')||''}</Col>
                 <Col span={4} className='label'>参与者（教工）</Col>
-                <Col span={8} className='padding-10'>雷国荣</Col>
+                <Col span={8} className='padding-10'>{get(detailData,'joinTeacher')||''}</Col>
               </Row>
               <Row className='add-project-modal-table'>
                 <Col span={4} className='label'>成果与其形式</Col>
-                <Col span={8} className='line padding-10'>成果应用报告</Col>
+                <Col span={8} className='line padding-10'>{get(detailData,'result_type')||''}</Col>
                 <Col span={4} className='label'>参与者（学生）</Col>
-                <Col span={8} className='padding-10'>罗永坚</Col>
+                <Col span={8} className='padding-10'>{get(detailData,'joinStudent')||''}</Col>
               </Row>
               <Row className='add-project-modal-table' style={{ border: '1px solid #e4e4e4' }}>
                 <Col span={4} className='label'>联系电话</Col>
-                <Col span={8} className='line padding-10'>13570533193</Col>
+                <Col span={8} className='line padding-10'>{get(detailData,'telephone')||''}</Col>
                 <Col span={4} className='label'>联系方式</Col>
-                <Col span={8} className='padding-10'>13688893574</Col>
+                <Col span={8} className='padding-10'>{get(detailData,'telephone')||''}</Col>
               </Row>
               
             <Row>
